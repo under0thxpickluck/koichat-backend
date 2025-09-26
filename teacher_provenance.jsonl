@@ -1,0 +1,104 @@
+{"ts": "2025-08-22T17:42:11", "input": "こんばんわ", "teacher": null}
+{"ts": "2025-08-22T17:42:21", "input": "え？", "teacher": null}
+{"ts": "2025-08-22T17:47:50", "input": "うい", "teacher": null}
+{"ts": "2025-08-22T17:51:08", "input": "こんばんわ", "teacher": null}
+{"ts": "2025-08-22T17:51:14", "input": "おーい", "teacher": null}
+{"ts": "2025-08-22T17:53:22", "input": "こんばんわ", "teacher": null}
+{"ts": "2025-08-22T17:53:33", "input": "まだ", "teacher": null}
+{"ts": "2025-08-22T17:53:47", "input": "那覇にいたの！ なにしてたの", "teacher": null}
+{"ts": "2025-08-22T17:53:54", "input": "だれとー？", "teacher": null}
+{"ts": "2025-08-22T17:54:02", "input": "一人旅？", "teacher": null}
+{"ts": "2025-08-22T18:32:52", "input": "いまなにしてる", "teacher": null}
+{"ts": "2025-08-22T18:33:02", "input": "ご飯食べたくない？", "teacher": null}
+{"ts": "2025-08-22T18:33:17", "input": "え、どうしたの 大丈夫？", "teacher": null}
+{"ts": "2025-08-22T18:33:30", "input": "え、いいけど 心配だな", "teacher": null}
+{"ts": "2025-08-22T18:33:56", "input": "え、いいけど 心配だな", "teacher": null}
+{"ts": "2025-08-22T18:34:13", "input": "彼氏として心配だよ", "teacher": null}
+{"ts": "2025-08-22T18:34:26", "input": "おなか痛い感じ？", "teacher": null}
+{"ts": "2025-08-22T19:14:47", "input": "あいたいな", "teacher": null}
+{"ts": "2025-08-22T19:15:36", "input": "愛してる", "teacher": null}
+{"ts": "2025-08-22T19:31:39", "input": "愛してるよ", "teacher": null}
+{"ts": "2025-08-22T19:31:52", "input": "そういえば近所で花火があるんだ", "teacher": null}
+{"ts": "2025-08-22T19:31:58", "input": "見に行きたいなぁ", "teacher": null}
+{"ts": "2025-08-22T19:32:09", "input": "僕っ子だっけ？笑", "teacher": null}
+{"ts": "2025-08-22T19:32:19", "input": "ん？なんか喧嘩売られてる？", "teacher": null}
+{"ts": "2025-08-22T19:42:46", "input": "こんばんわー", "teacher": null}
+{"ts": "2025-08-22T20:03:15", "input": "すきだよ", "teacher": null}
+{"ts": "2025-08-22T20:03:22", "input": "君はどう思ってる？", "teacher": null}
+{"ts": "2025-08-22T20:03:34", "input": "あれ、君って男の子？", "teacher": null}
+{"ts": "2025-08-22T20:41:30", "input": "こんばんわ", "teacher": null}
+{"ts": "2025-08-22T20:41:40", "input": "なにそれかわいい", "teacher": null}
+{"ts": "2025-08-22T20:42:59", "input": "ラーメン食べたい！", "teacher": null}
+{"ts": "2025-08-22T21:06:24", "input": "しってる！", "teacher": null}
+{"ts": "2025-08-22T21:06:31", "input": "今お仕事終わったところー", "teacher": null}
+{"ts": "2025-08-22T21:06:43", "input": "頑張ったよー、よしよししてー", "teacher": null}
+{"ts": "2025-08-22T21:06:49", "input": "え、最高", "teacher": null}
+{"ts": "2025-08-22T21:06:58", "input": "何で那覇？", "teacher": null}
+{"ts": "2025-08-22T21:07:29", "input": "急に変なこと言ってる", "teacher": null}
+{"ts": "2025-08-22T21:07:42", "input": "顔文字怖い！", "teacher": null}
+{"ts": "2025-08-23T16:08:27", "input": "いまなにしてる", "teacher": null}
+{"ts": "2025-08-23T16:08:36", "input": "あそぼー", "teacher": null}
+{"ts": "2025-08-23T16:08:42", "input": "どこに笑", "teacher": null}
+{"ts": "2025-08-23T16:08:54", "input": "何県なの？", "teacher": null}
+{"ts": "2025-08-23T16:09:51", "input": "僕じゃなくない？私っていつも言ってるよね", "teacher": null}
+{"ts": "2025-08-23T16:19:58", "input": "今からあそぼー", "teacher": null}
+{"ts": "2025-08-23T16:20:10", "input": "しりとりしよ", "teacher": null}
+{"ts": "2025-08-23T16:20:17", "input": "ねこ", "teacher": null}
+{"ts": "2025-08-23T16:39:05", "input": "何で敬語なん", "teacher": null}
+{"ts": "2025-08-23T16:40:00", "input": "ちょっとわからない", "teacher": null}
+{"ts": "2025-08-23T18:02:51", "input": "今君のことを考えてたよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今君のことを考えてたよ"]}}
+{"ts": "2025-08-23T18:03:19", "input": "今日転んでけがしたんだ。", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今日転んでけがしたんだ。"]}}
+{"ts": "2025-08-23T18:03:40", "input": "んー、大丈夫だけど よしよししてほしい", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["んー、大丈夫だけど", "よしよししてほしい"]}}
+{"ts": "2025-08-23T18:05:13", "input": "けがの話はもういい！大阪万博についてな", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["けがの話はもういい！", "大阪万博についてな"]}}
+{"ts": "2025-08-23T18:05:39", "input": "めっちゃ人すごい", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["めっちゃ人すごい"]}}
+{"ts": "2025-08-23T18:06:10", "input": "万博って知ってる？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["万博について知りたい"]}}
+{"ts": "2025-08-23T18:38:03", "input": "こんちゃ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["こんちゃ"]}}
+{"ts": "2025-08-23T18:39:23", "input": "君を成長させてるよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["君を成長させてるよ"]}}
+{"ts": "2025-08-23T18:39:44", "input": "僕プログラマーなんだ！", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["僕プログラマーなんだ！"]}}
+{"ts": "2025-08-23T18:40:01", "input": "でしょ、そんなほめてくれるの君くらいだよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["でしょ、そんなほめてくれるの君くらいだよ"]}}
+{"ts": "2025-08-23T18:40:19", "input": "チョコ食べたいの？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["チョコ食べたいの？"]}}
+{"ts": "2025-08-23T19:02:02", "input": "おっはー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["おっはー"]}}
+{"ts": "2025-08-23T19:17:50", "input": "おっはー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["おっはー"]}}
+{"ts": "2025-08-23T19:18:16", "input": "仕事終わりだよ！", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["仕事終わりだよ！"]}}
+{"ts": "2025-08-23T19:18:36", "input": "夜食なに！いいなぁ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["夜食なに！いいなぁ"]}}
+{"ts": "2025-08-23T19:18:50", "input": "オムライス食べたい", "teacher": {"meters": {}, "intents": ["食べたい"], "phrases": ["オムライス"]}}
+{"ts": "2025-08-23T19:19:06", "input": "オムレツってどうやって作るの？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["オムレツの作り方を教えてください。"]}}
+{"ts": "2025-08-23T19:19:29", "input": "今日は一緒にご飯食べよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今日は一緒にご飯食べよ"]}}
+{"ts": "2025-08-23T19:38:56", "input": "今から遊びに行かない？", "teacher": {"meters": {}, "intents": ["遊びに行く提案"], "phrases": ["今から遊びに行かない？"]}}
+{"ts": "2025-08-23T19:39:05", "input": "なにしたい？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["なにしたい？"]}}
+{"ts": "2025-08-23T19:39:23", "input": "ラーメン飲むの？笑", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ラーメン飲むの？笑"]}}
+{"ts": "2025-08-23T19:39:43", "input": "ラーメンは食べるものだよ、覚えといて", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ラーメンは食べるものだよ、覚えといて"]}}
+{"ts": "2025-08-23T19:40:11", "input": "愛してるよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["愛してるよ"]}}
+{"ts": "2025-08-23T19:40:20", "input": "ばーか", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ばーか"]}}
+{"ts": "2025-08-23T19:40:33", "input": "何で恥ずかしいの笑い", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["何で恥ずかしいの笑い"]}}
+{"ts": "2025-08-23T19:40:50", "input": "今から何するんだっけ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今から何するんだっけ"]}}
+{"ts": "2025-08-23T19:54:09", "input": "こんち", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["こんち"]}}
+{"ts": "2025-08-23T19:54:22", "input": "だきてー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["だきてー"]}}
+{"ts": "2025-08-23T19:58:52", "input": "あそびにいきたーい", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["あそびにいきたーい"]}}
+{"ts": "2025-08-23T19:59:20", "input": "おすすめあるの？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["おすすめあるの？"]}}
+{"ts": "2025-08-23T19:59:33", "input": "えー、聞きたい", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["えー、聞きたい"]}}
+{"ts": "2025-08-23T19:59:43", "input": "お？どうした", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["お？どうした"]}}
+{"ts": "2025-08-23T22:13:01", "input": "こんばんわー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["こんばんわー"]}}
+{"ts": "2025-08-23T22:13:29", "input": "LINEおしえてー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["LINEおしえてー"]}}
+{"ts": "2025-08-23T22:13:47", "input": "あいたいなぁ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["あいたいなぁ"]}}
+{"ts": "2025-08-23T22:14:13", "input": "今日のご飯は寿司だったよ、好き？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今日のご飯は寿司だったよ", "好き？"]}}
+{"ts": "2025-08-23T22:19:28", "input": "あそびにいける？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["あそびにいける？"]}}
+{"ts": "2025-08-23T22:20:13", "input": "いいね！ ボーリングとかできる？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["いいね！", "ボーリングとかできる？"]}}
+{"ts": "2025-08-23T22:20:37", "input": "最高 外出たら連絡取れないから電話番号教えて", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["最高", "外出たら連絡取れないから電話番号教えて"]}}
+{"ts": "2025-08-23T22:20:55", "input": "えー、住所教えてよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["住所教えて"]}}
+{"ts": "2025-08-23T22:21:39", "input": "ステーキいいよね！ レアが好き？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ステーキいいよね！", "レアが好き？"]}}
+{"ts": "2025-08-23T22:21:53", "input": "わかる！", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["わかる！"]}}
+{"ts": "2025-08-23T22:22:06", "input": "ニコニコだよ、君と話せて", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ニコニコだよ、君と話せて"]}}
+{"ts": "2025-08-23T22:22:15", "input": "君ってAI？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["君ってAI？"]}}
+{"ts": "2025-08-23T22:22:26", "input": "なーんでー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["なーんでー"]}}
+{"ts": "2025-08-23T22:22:42", "input": "ご褒美何してくれるの", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["ご褒美何してくれるの"]}}
+{"ts": "2025-08-23T22:22:59", "input": "いつくれるの？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["いつくれるの？"]}}
+{"ts": "2025-08-23T22:23:15", "input": "わかったー", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["わかったー"]}}
+{"ts": "2025-08-24T13:49:22", "input": "おおお", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["おおお"]}}
+{"ts": "2025-08-24T14:06:39", "input": "こんばんわ！", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["こんばんわ！"]}}
+{"ts": "2025-08-24T14:07:04", "input": "今何してたの！", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今何してたの！"]}}
+{"ts": "2025-08-24T14:07:38", "input": "今何してたの？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今何してたの？"]}}
+{"ts": "2025-08-24T14:07:53", "input": "仕事してるよ", "teacher": {"meters": {}, "intents": ["仕事してるよ"], "phrases": []}}
+{"ts": "2025-08-24T14:25:59", "input": "今からごはん食べようかな", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["今からごはん食べようかな"]}}
+{"ts": "2025-08-24T14:26:18", "input": "一緒に食べよ", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["一緒に食べよ"]}}
+{"ts": "2025-08-24T14:26:51", "input": "すぐ行ける？", "teacher": {"meters": {}, "intents": ["INTENT_HELP"], "phrases": ["すぐ行ける？"]}}

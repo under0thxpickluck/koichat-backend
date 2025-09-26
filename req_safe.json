@@ -1,0 +1,11 @@
+﻿{
+  "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+  "prompt": "RAW photo, Japanese adult woman (23 years old) wearing a white summer dress, standing on a beach boardwalk at golden hour, natural skin texture, soft light, shallow depth of field, professional color grading",
+  "negative_prompt": "nsfw, nude, explicit, anime, cgi, doll, plastic skin, text, watermark",
+  "width": 512,
+  "height": 768,
+  "steps": 30,
+  "guidance_scale": 5.0,
+  "seed": 1234,
+  "username": "Airi"
+}

@@ -1,0 +1,30 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ログ/一時
+*.log
+*.tmp
+
+# 生成物
+generated/
+
+# 環境変数
+.env
+.env.*
+
+# エディタ
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+# models & checkpoints (do not commit)
+lora-Achan/
+*.safetensors
+*.pt
+*.bin
+*.ckpt

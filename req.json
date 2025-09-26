@@ -1,0 +1,12 @@
+﻿{
+  "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+  "prompt": "RAW photo, studio portrait of a very cute 23-year-old Japanese woman with long black hair, fair skin, large breasts and a slender waist, wearing a white dress, softbox lighting, clean neutral background, natural skin texture and pores, subtle J-beauty makeup, 85mm lens, f/2.0, shallow depth of field, catchlight in eyes, subtle film grain, professional color grading",
+  "negative_prompt": "anime, cgi, doll, plastic skin, waxy, overprocessed, oversharpen, text, watermark, nsfw",
+  "width": 896,
+  "height": 1152,
+  "steps": 30,
+  "guidance_scale": 5.0,
+  "seed": 13579,
+  "username": "Airi",
+  "options": { "refiner_denoising_end": 0.2 }
+}

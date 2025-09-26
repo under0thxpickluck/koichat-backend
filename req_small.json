@@ -1,0 +1,11 @@
+﻿{
+  "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+  "prompt": "RAW photo, full-body Japanese adult woman (23 years old), white lingerie set, standing on a beachside boardwalk at golden hour, natural skin texture, soft light, shallow depth of field, professional color grading",
+  "negative_prompt": "nsfw, nude, explicit, anime, cgi, doll, plastic skin, waxy, overprocessed, oversharpen, text, watermark, extra fingers, extra hands, bad hands, missing fingers",
+  "width": 256,
+  "height": 256,
+  "steps": 20,
+  "guidance_scale": 3.5,
+  "seed": 1,
+  "username": "Airi"
+}

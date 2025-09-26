@@ -1,0 +1,119 @@
+{
+  "Airi": {
+    "auto_update": {
+      "persona": true,
+      "likes": true,
+      "tone": true,
+      "ending": true
+    },
+    "__last_intent": "neutral",
+    "__last_bot": "おはよう！今日も元気な一日になるといいね！",
+    "points": 255,
+    "meters": {
+      "like": 100,
+      "amae": 50,
+      "tereru": 40,
+      "yasuragi": 29,
+      "jealousy": 20,
+      "intimacy": 55
+    },
+    "gift_usage": {
+      "bouquet": {
+        "count": 1,
+        "date": "2025-09-25"
+      }
+    },
+    "album": [
+      {
+        "url": "/generated/sd-20250925-151938.png",
+        "tag": null,
+        "ts": "20250925-151938"
+      },
+      {
+        "url": "/generated/sd-20250925-151658.png",
+        "tag": null,
+        "ts": "20250925-151658"
+      },
+      {
+        "url": "/generated/sd-20250925-151449.png",
+        "tag": null,
+        "ts": "20250925-151449"
+      },
+      {
+        "url": "/generated/sd-20250925-150815.png",
+        "tag": null,
+        "ts": "20250925-150815"
+      },
+      {
+        "url": "/generated/sd-20250925-145814.png",
+        "tag": null,
+        "ts": "20250925-145815"
+      },
+      {
+        "url": "/generated/sd-20250925-145718.png",
+        "tag": null,
+        "ts": "20250925-145718"
+      },
+      {
+        "url": "/generated/sd-20250925-145414.png",
+        "tag": null,
+        "ts": "20250925-145414"
+      },
+      {
+        "url": "/generated/sd-20250909-190305.png",
+        "tag": null,
+        "ts": "20250909-190305"
+      },
+      {
+        "url": "/generated/sd-20250909-190226.png",
+        "tag": null,
+        "ts": "20250909-190226"
+      },
+      {
+        "url": "/generated/sd-20250908-205522.png",
+        "tag": null,
+        "ts": "20250908-205522"
+      },
+      {
+        "url": "/generated/sd-20250908-205151.png",
+        "tag": null,
+        "ts": "20250908-205151"
+      },
+      {
+        "url": "/generated/sd-20250908-204133.png",
+        "tag": null,
+        "ts": "20250908-204133"
+      },
+      {
+        "url": "/generated/sd-20250908-203816.png",
+        "tag": null,
+        "ts": "20250908-203816"
+      },
+      {
+        "url": "/generated/sd-20250908-201758.png",
+        "tag": null,
+        "ts": "20250908-201758"
+      },
+      {
+        "url": "/generated/sd-20250908-184537.png",
+        "tag": null,
+        "ts": "20250908-184538"
+      },
+      {
+        "url": "/generated/sd-20250908-184246.png",
+        "tag": null,
+        "ts": "20250908-184246"
+      },
+      {
+        "url": "/generated/sd-20250908-181346.png",
+        "tag": null,
+        "ts": "20250908-181347"
+      },
+      {
+        "url": "/generated/sd-20250908-162050.png",
+        "tag": null,
+        "ts": "20250908-162050"
+      }
+    ]
+  }
+}
