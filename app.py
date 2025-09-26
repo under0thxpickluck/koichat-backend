@@ -372,49 +372,80 @@ def build_messages(user_message: str, user_data: dict, state=None, history_turns
 
 def build_model_inputs(messages):
     # 軽量モードや初期化失敗時は None を返す
-    if not ENABLE_MODEL or not tokenizer or not device:
+    if (not ENABLE_MODEL) or (tokenizer is None) or (device is None):
         return None
     prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return tokenizer(prompt_text, return_tensors="pt").to(device)
 
+
 def generate_response(messages, max_new_tokens=110):
-        """
+    """
     モデル有効時: これまで通り torch+HF で生成
     軽量モード: OpenAI にフォールバック（失敗時は簡易メッセージ）
     """
     # 軽量モード or 未初期化 → OpenAI にフォールバック
-    if (not ENABLE_MODEL) or (not tokenizer) or (not model):
-        # system と user を抽出
+    if (not ENABLE_MODEL) or (tokenizer is None) or (model is None):
         sys_msg = ""
         for m in messages:
             if m.get("role") == "system":
                 sys_msg = m.get("content") or ""
                 break
-        # 最後の user
         user_msg = ""
         for m in reversed(messages):
             if m.get("role") == "user":
                 user_msg = m.get("content") or ""
                 break
-        # OpenAI へ（失敗しても安全）
         out = ask_openai(sys_msg, user_msg, max_tokens=max_new_tokens)
         return out or "うん、そうしよ。"
+
+    # ここから従来のローカルモデル経路
     inputs = build_model_inputs(messages)
+    if inputs is None:
+        sys_msg = ""
+        for m in messages:
+            if m.get("role") == "system":
+                sys_msg = m.get("content") or ""
+                break
+        user_msg = ""
+        for m in reversed(messages):
+            if m.get("role") == "user":
+                user_msg = m.get("content") or ""
+                break
+        out = ask_openai(sys_msg, user_msg, max_tokens=max_new_tokens)
+        return out or "うん、そうしよ。"
+
     try:
         with torch.inference_mode():
             out = model.generate(
-                **inputs, max_new_tokens=max_new_tokens, do_sample=False, trust_remote_code=True,
-                penalty_alpha=0.6, top_k=4, repetition_penalty=1.15,
-                no_repeat_ngram_size=3, pad_token_id=tokenizer.eos_token_id,
+                **inputs,
+                max_new_tokens=max_new_tokens,
+                do_sample=False,
+                trust_remote_code=True,
+                penalty_alpha=0.6,
+                top_k=4,
+                repetition_penalty=1.15,
+                no_repeat_ngram_size=3,
+                pad_token_id=tokenizer.eos_token_id,
                 eos_token_id=tokenizer.eos_token_id,
             )
-        input_len = inputs['input_ids'].shape[1]
+        input_len = inputs["input_ids"].shape[1]
         response_ids = out[0][input_len:]
         text = tokenizer.decode(response_ids, skip_special_tokens=True).strip()
         return text
-    except torch.cuda.OutOfMemoryError:
-        torch.cuda.empty_cache()
-        return "ごめん、ちょっと考えすぎちゃったみたい…。"
+    except Exception as e:
+        print(f"[local-generate error] {e}")
+        sys_msg = ""
+        for m in messages:
+            if m.get("role") == "system":
+                sys_msg = m.get("content") or ""
+                break
+        user_msg = ""
+        for m in reversed(messages):
+            if m.get("role") == "user":
+                user_msg = m.get("content") or ""
+                break
+        out = ask_openai(sys_msg, user_msg, max_tokens=max_new_tokens)
+        return out or "うん、そうしよ。"
 
 def postprocess(text: str, username: str, user_text: str = "", user_data: dict = None) -> str:
     user_data = user_data or {}
