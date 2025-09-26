@@ -3,9 +3,6 @@
 from pathlib import Path
 import os, json, re, unicodedata # ★os を修正
 import gradio as gr # ★gr を修正
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig 
-from peft import PeftModel
 from datetime import datetime
 from normalizer import normalize_user_text
 import random
@@ -30,6 +27,15 @@ import re, json
 from pathlib import Path
 from random import sample
 
+ENABLE_MODEL = os.getenv("ENABLE_MODEL", "0") == "1"
+
+if ENABLE_MODEL:
+    import torch
+    from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+    from peft import PeftModel
+else:
+    torch = None  # 型だけ用意しておく
+    AutoTokenizer = AutoModelForCausalLM = BitsAndBytesConfig = PeftModel = None
 _DEFAULT_USER = (user_manager.get_user_list() or [None])[0]
 FEEDBACK_DIR = (user_manager.get_user_dir(_DEFAULT_USER)/"feedback") if _DEFAULT_USER else (Path(__file__).parent/"data")
 
@@ -59,62 +65,66 @@ def load_feedback_assets():
 
 # アプリ起動時のどこか一度だけ呼ぶ
 load_feedback_assets()
+if ENABLE_MODEL:
+    MODEL = "Qwen/Qwen2-7B-Instruct"
+    LORA_PATH = "./lora-Achan"
 
-# =========================
-# モデル & LoRA 読込
-# =========================
-MODEL = "Qwen/Qwen2-7B-Instruct"
-LORA_PATH = "./lora-Achan"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer = AutoTokenizer.from_pretrained(MODEL, trust_remote_code=True)
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-tokenizer = AutoTokenizer.from_pretrained(MODEL, trust_remote_code=True)
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+    )
 
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.bfloat16,
-    bnb_4bit_use_double_quant=True,
-)
+    model = AutoModelForCausalLM.from_pretrained(
+        MODEL,
+        trust_remote_code=True,
+        quantization_config=quantization_config,
+        attn_implementation="sdpa",
+        device_map="auto"
+    )
+    try:
+        model = PeftModel.from_pretrained(model, LORA_PATH)
+        print(f"✅ LoRA adapter loaded: {LORA_PATH}")
+    except Exception as e:
+        print(f"⚠️ LoRA adapter not loaded: {e}\n→ ベースモデルで起動します")
 
-model = AutoModelForCausalLM.from_pretrained(
-    MODEL,
-    trust_remote_code=True,
-    quantization_config=quantization_config,
-    attn_implementation="sdpa",
-    device_map="auto"
-)
-try:
-    model = PeftModel.from_pretrained(model, LORA_PATH)
-    print(f"✅ LoRA adapter loaded: {LORA_PATH}")
-except Exception as e:
-    print(f"⚠️ LoRA adapter not loaded: {e}\n→ ベースモデルで起動します")
+    try:
+        gc = model.generation_config
+        for k in ("do_sample", "temperature", "top_p", "top_k", "typical_p"):
+            if hasattr(gc, k): setattr(gc, k, None)
+        print(">>> generation_config sanitized (sampling params removed)")
+    except Exception as e:
+        print(">>> generation_config patch skipped:", e)
 
-try:
-    gc = model.generation_config
-    for k in ("do_sample", "temperature", "top_p", "top_k", "typical_p"):
-        if hasattr(gc, k): setattr(gc, k, None)
-    print(">>> generation_config sanitized (sampling params removed)")
-except Exception as e:
-    print(">>> generation_config patch skipped:", e)
+    try:
+        name = torch.cuda.get_device_name(0) if torch.cuda.is_available() else "-"
+        print(f">>> DEVICE: {device}  torch={torch.__version__}  cuda_runtime={torch.version.cuda}  gpu={name}  dtype={model.dtype}")
+    except Exception as _e:
+        print(">>> DEVICE LOG ERROR:", _e)
+    try:
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.set_float32_matmul_precision("high")
+    except Exception:
+        pass
+    model.eval()
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    try:
+        if model.get_input_embeddings().num_embeddings != len(tokenizer):
+            model.resize_token_embeddings(len(tokenizer))
+    except Exception as _e:
+        print("token embeddings resize skipped:", _e)
 
-try:
-    name = torch.cuda.get_device_name(0) if torch.cuda.is_available() else "-"
-    print(f">>> DEVICE: {device}  torch={torch.__version__}  cuda_runtime={torch.version.cuda}  gpu={name}  dtype={model.dtype}")
-except Exception as _e:
-    print(">>> DEVICE LOG ERROR:", _e)
-try:
-    torch.backends.cuda.matmul.allow_tf32 = True
-    torch.set_float32_matmul_precision("high")
-except Exception:
-    pass
-model.eval()
-if tokenizer.pad_token_id is None:
-    tokenizer.pad_token = tokenizer.eos_token
-try:
-    if model.get_input_embeddings().num_embeddings != len(tokenizer):
-        model.resize_token_embeddings(len(tokenizer))
-except Exception as _e:
-    print("token embeddings resize skipped:", _e)
+else:
+    # モデルを無効化する軽量モード（Render Free での起動用）
+    MODEL = None
+    tokenizer = None
+    model = None
+    device = "cpu"
 
 ALLOWED_AUTO_UPDATE = {"persona": True, "likes": True, "tone": True, "ending": True}
 _AUTO_UPDATE_LAST_TS = {}
@@ -361,10 +371,34 @@ def build_messages(user_message: str, user_data: dict, state=None, history_turns
     return msgs
 
 def build_model_inputs(messages):
+    # 軽量モードや初期化失敗時は None を返す
+    if not ENABLE_MODEL or not tokenizer or not device:
+        return None
     prompt_text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return tokenizer(prompt_text, return_tensors="pt").to(device)
 
 def generate_response(messages, max_new_tokens=110):
+        """
+    モデル有効時: これまで通り torch+HF で生成
+    軽量モード: OpenAI にフォールバック（失敗時は簡易メッセージ）
+    """
+    # 軽量モード or 未初期化 → OpenAI にフォールバック
+    if (not ENABLE_MODEL) or (not tokenizer) or (not model):
+        # system と user を抽出
+        sys_msg = ""
+        for m in messages:
+            if m.get("role") == "system":
+                sys_msg = m.get("content") or ""
+                break
+        # 最後の user
+        user_msg = ""
+        for m in reversed(messages):
+            if m.get("role") == "user":
+                user_msg = m.get("content") or ""
+                break
+        # OpenAI へ（失敗しても安全）
+        out = ask_openai(sys_msg, user_msg, max_tokens=max_new_tokens)
+        return out or "うん、そうしよ。"
     inputs = build_model_inputs(messages)
     try:
         with torch.inference_mode():
