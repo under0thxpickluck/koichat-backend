@@ -2,3 +2,5 @@
 uvicorn[standard]
 gradio
 python-dotenv
+openai>=1.0.0
+rapidfuzz>=3.5.2
