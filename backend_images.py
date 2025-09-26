@@ -23,14 +23,26 @@ else:
 def _torch_available() -> bool:
     return _ENABLE_MODEL and (torch is not None)
 
-# Diffusers（Refinerは型に依存しないフォールバックを用意）
-from diffusers import (
-    StableDiffusionPipeline,          # SD1.5
-    StableDiffusionXLPipeline,        # SDXL Base
-    AutoPipelineForText2Image,        # Auto（XL単段）
-    DPMSolverMultistepScheduler,
-    DiffusionPipeline,                # Refinerの代替にも使える
-)
+
+# ==== gate diffusers too ====
+if _ENABLE_MODEL:
+    try:
+        # 使っているものをまとめてここで import（名前はあなたのコードに合わせて）
+        from diffusers import (
+            DiffusionPipeline,
+            AutoPipelineForText2Image,
+            AutoPipelineForImage2Image,
+            StableDiffusionXLPipeline,
+        )
+    except ModuleNotFoundError as e:
+        print(f"[light-mode(images:diffusers)] {e}; falling back to _ENABLE_MODEL=0")
+        _ENABLE_MODEL = False
+        DiffusionPipeline = AutoPipelineForText2Image = AutoPipelineForImage2Image = StableDiffusionXLPipeline = None
+else:
+    DiffusionPipeline = AutoPipelineForText2Image = AutoPipelineForImage2Image = StableDiffusionXLPipeline = None
+# ==== end ====
+
+
 
 # Refiner の安全なフォールバック：
 #  - まずネイティブの StableDiffusionXLRefinerPipeline を試す
