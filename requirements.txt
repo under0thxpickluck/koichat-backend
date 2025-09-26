@@ -1,9 +1,4 @@
 ﻿fastapi
 uvicorn[standard]
 gradio
-transformers
-peft
-accelerate
-safetensors
-# CPU版PyTorch（まずはこれで。GPUは別環境で）
-torch --index-url https://download.pytorch.org/whl/cpu
+python-dotenv
