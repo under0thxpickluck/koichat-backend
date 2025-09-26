@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Dict, Any, Optional, Tuple, List, TYPE_CHECKING
 import os
 import json
 
@@ -41,7 +41,13 @@ if _ENABLE_MODEL:
 else:
     DiffusionPipeline = AutoPipelineForText2Image = AutoPipelineForImage2Image = StableDiffusionXLPipeline = None
 # ==== end ====
-
+if TYPE_CHECKING:
+    from diffusers import (
+        StableDiffusionPipeline,
+        StableDiffusionXLPipeline,
+        AutoPipelineForText2Image,
+        AutoPipelineForImage2Image,
+    )
 
 
 # Refiner の安全なフォールバック：
@@ -72,9 +78,9 @@ DEFAULT_TURBO = "stabilityai/sdxl-turbo"
 _MODELS = [DEFAULT_SD15_ID, DEFAULT_SDXL_BASE, DEFAULT_SDXL_REFINER, DEFAULT_TURBO]
 
 # キャッシュ（メモリ）
-_SD15_CACHE: Dict[str, StableDiffusionPipeline] = {}
+_SD15_CACHE: Dict[str, Any] = {}
 _XL_SIMPLE_CACHE: Dict[str, Any] = {}
-_SDXL_CACHE: Dict[Tuple[str, str], Tuple[StableDiffusionXLPipeline, Any]] = {}
+_SDXL_CACHE: Dict[Tuple[str, str], Tuple[Any, Any]] = {}
 
 
 @router.get("/get_user_data")
@@ -97,7 +103,12 @@ def get_user_data(username: str):
 # ユーティリティ
 # ------------------------------------------------------------
 def _get_device() -> str:
-    return "cuda" if torch.cuda.is_available() else "cpu"
+    try:
+        if (torch is not None) and hasattr(torch, "cuda") and torch.cuda.is_available():
+            return "cuda"
+    except Exception:
+        pass
+    return "cpu"
 
 def _now_stamp() -> str:
     return datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -198,18 +209,22 @@ def _append_album(username: str, url: str, tag: Optional[str]) -> None:
 def _load_sd15(model_id: str = DEFAULT_SD15_ID) -> StableDiffusionPipeline:
     if model_id in _SD15_CACHE:
         return _SD15_CACHE[model_id]
+
     pipe = StableDiffusionPipeline.from_pretrained(
         model_id, torch_dtype=torch.float16, use_safetensors=True
     )
-    # スケジューラはDPMSolverに（高速・高品質のバランス）
+
+    # スケジューラは DPMSolver を使用（遅延 import で Free 環境でも安全）
     try:
+        from diffusers import DPMSolverMultistepScheduler  # ← ここで遅延 import
         pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
     except Exception:
+        # diffusers 未導入/古い場合などは既定スケジューラのまま
         pass
+
     pipe.to(_get_device())
     _SD15_CACHE[model_id] = pipe
     return pipe
-
 def _load_xl_simple(base_id: str = DEFAULT_SDXL_BASE):
     """SDXL Base（Refinerなし）を安全にロード。AutoPipelineで型ズレ事故を避ける。"""
     if base_id in _XL_SIMPLE_CACHE:
