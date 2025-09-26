@@ -5,21 +5,23 @@ from datetime import datetime
 from typing import Dict, Any, Optional, Tuple, List
 import os
 import json
-import torch
 
 
-# ==== [ADD] 軽量モードスイッチ（Render Free で落とさない） ====
-import os as _os  # 既存の os と衝突しないように別名でもOK
+import os as _os
 _ENABLE_MODEL = _os.getenv("ENABLE_MODEL", "0") == "1"
 
 if _ENABLE_MODEL:
-    import torch  # type: ignore
+    try:
+        import torch  # type: ignore
+    except ModuleNotFoundError as e:
+        print(f"[light-mode(images)] {e}; falling back to _ENABLE_MODEL=0")
+        _ENABLE_MODEL = False
+        torch = None  # type: ignore
 else:
-    # ダミーを用意（後段で参照されても落ちないように）
     torch = None  # type: ignore
+
 def _torch_available() -> bool:
     return _ENABLE_MODEL and (torch is not None)
-# ==== [ADD end] ====
 
 # Diffusers（Refinerは型に依存しないフォールバックを用意）
 from diffusers import (
