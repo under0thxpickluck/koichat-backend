@@ -1,3 +1,4 @@
+from __future__ import annotations
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pathlib import Path
@@ -5,7 +6,6 @@ from datetime import datetime
 from typing import Dict, Any, Optional, Tuple, List, TYPE_CHECKING
 import os
 import json
-from __future__ import annotations
 
 import os as _os
 _ENABLE_MODEL = _os.getenv("ENABLE_MODEL", "0") == "1"
